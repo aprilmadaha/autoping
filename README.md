@@ -1,5 +1,5 @@
 # autoping
-excel pandas fping 联动检测主机存活率
+excel pandas ping fping 联动检测主机/服务器/交换机/摄像头/雷达/边缘计算/MEC 存活率
 遍历execl的IP地址然后在后面插入一列输出是否存活
 自动统计在线率脚本
 
