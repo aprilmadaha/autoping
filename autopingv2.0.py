@@ -13,7 +13,6 @@ def get_change_ping_list(ping_list):#序列化exce表的ip,让程序能能够处
     change_ping_list =[]
     for ip in ping_list:
         change_ping_list.append(ip)
-    # print("resutl_list",result_list)
     fping_ping_list = " ".join(change_ping_list) #数组增加空格符合fping格式
     return fping_ping_list
 
