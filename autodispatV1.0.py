@@ -25,7 +25,7 @@ def get_work_value(excel_name):  #得到索引和工作界面值
                         listallresult.append(str(b_index) + ' '+'百度')
                 else:   #如果全部为0，那么为0
                     for w_index in pole_result_index:
-                        listallresult.append(str(w_index)+' '+ '网联')
+                        listallresult.append(str(w_index)+' '+ '网信')
     return listallresult
 
 def write_excel(excel_name,excel_sheet,list_workvalue,execl_ncols):
