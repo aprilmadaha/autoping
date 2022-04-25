@@ -24,7 +24,7 @@ def get_monit_value(excel_name):  #筛选工作界面，得到索引和工作界
 
         for indexl,rowl in indexall.iterrows():
             indexNum = str(rowl[0])+'-'+str(indexl)
-            ipNum = row[4]
+            ipNum = rowl[4]
             str1 = '++'+' '+indexNum+'\n'
             str2 = 'menu = '+indexNum+'\n'
             str3 = 'title = '+indexNum+' '+ipNum+'\n'
