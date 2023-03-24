@@ -101,7 +101,7 @@ def assignIP(deviceList,roadIndexList):               #分配地址
                 rscuIP= 6
                 ccuIP= 31
 
-                for device in deviceList:
+                for device in deviceList:       #遍历每行设备列表
                         if device[0] == roadindex:
                                 # print(device)
                                 if device[4] == '感知摄像头':
