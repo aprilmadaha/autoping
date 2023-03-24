@@ -88,83 +88,87 @@ def loopDevice(iplist,roadNum,roadName,poleNum,pointIn,loopNum,deviceName):#根�
                 # print(deviceInfo)
                 iplist.append(deviceInfo)
        
-def assignIP(deviceList):               #分配地址
+def assignIP(deviceList,roadIndexList):               #分配地址
         arrayIP =[172,21]               #初始地址分配
-        cameraIP = 101                  #摄像头启使地址
-        fisheyeIP= 131
-        lidarIP= 151
-        rsuIP= 11
-        switchIP= 21
-        rscuIP= 6
-        ccuIP= 31
         deviceInfoList = []
 
-        for device in deviceList:
-                if device[4] == '感知摄像头':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],cameraIP)
-                        cameraID = 'camera-'+str(device[0])+'-'+str(cameraIP)      #摄像头ID
-                        cameraIP = cameraIP + 1 #序号自增1
-                        device.append(cameraID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)
-                        device.append(deviceGateway)
-                        # print(device)
-                elif device[4] == '鱼眼相机':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],fisheyeIP)
-                        fisheyeID = 'camera-'+str(device[0])+'-'+str(fisheyeIP) 
-                        fisheyeIP = fisheyeIP + 1
-                        device.append(fisheyeID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)#添加网关
-                        device.append(deviceGateway)
-                        # print(device)
-                elif device[4] == '雷达':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],lidarIP)
-                        lidarID = 'lidar-'+str(device[0])+'-'+str(lidarIP) 
-                        lidarIP = lidarIP + 1
-                        device.append(lidarID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)
-                        device.append(deviceGateway)
-                        # print(device)
-                elif device[4] == 'RSU':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],rsuIP)
-                        rsuID = 'rsu-'+str(device[0])+'-'+str(rsuIP) 
-                        rsuIP = rsuIP + 1
-                        device.append(rsuID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)
-                        device.append(deviceGateway)
-                        # print(device)
-                elif device[4] == '交换机':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],switchIP)
-                        switchID = 'sw-'+str(device[0])+'-'+str(switchIP) 
-                        switchIP = switchIP + 1
-                        device.append(switchID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)
-                        device.append(deviceGateway)
-                        # print(device)
-                elif device[4] == 'RSCU':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],rscuIP)
-                        rscuID = 'rscu-'+str(device[0])+'-'+str(rscuIP) 
-                        rscuIP = rscuIP + 1
-                        device.append(rscuID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)
-                        device.append(deviceGateway)
-                        # print(device)
-                elif device[4] == '采集器':
-                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],ccuIP)
-                        ccuID = 'ccu-'+str(device[0])+'-'+str(ccuIP) 
-                        ccuIP = ccuIP + 1
-                        device.append(ccuID)
-                        device.append(deviceIP)
-                        device.append(deviceNetMask)
-                        device.append(deviceGateway)
-                        # print(device)
-                deviceInfoList.append(device)
+        for roadindex in roadIndexList:         #为了每个路口遍历后重新读区IP开始地址
+                cameraIP = 101                  #摄像头启使地址
+                fisheyeIP= 131
+                lidarIP= 151
+                rsuIP= 11
+                switchIP= 21
+                rscuIP= 6
+                ccuIP= 31
 
+                for device in deviceList:
+                        if device[0] == roadindex:
+                                # print(device)
+                                if device[4] == '感知摄像头':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],cameraIP)
+                                        cameraID = 'camera-'+str(device[0])+'-'+str(cameraIP)      #摄像头ID
+                                        cameraIP = cameraIP + 1 #序号自增1
+                                        device.append(cameraID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                elif device[4] == '鱼眼相机':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],fisheyeIP)
+                                        fisheyeID = 'camera-'+str(device[0])+'-'+str(fisheyeIP) 
+                                        fisheyeIP = fisheyeIP + 1
+                                        device.append(fisheyeID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)#添加网关
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                elif device[4] == '雷达':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],lidarIP)
+                                        lidarID = 'lidar-'+str(device[0])+'-'+str(lidarIP) 
+                                        lidarIP = lidarIP + 1
+                                        device.append(lidarID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                elif device[4] == 'RSU':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],rsuIP)
+                                        rsuID = 'rsu-'+str(device[0])+'-'+str(rsuIP) 
+                                        rsuIP = rsuIP + 1
+                                        device.append(rsuID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                elif device[4] == '交换机':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],switchIP)
+                                        switchID = 'sw-'+str(device[0])+'-'+str(switchIP) 
+                                        switchIP = switchIP + 1
+                                        device.append(switchID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                elif device[4] == 'RSCU':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],rscuIP)
+                                        rscuID = 'rscu-'+str(device[0])+'-'+str(rscuIP) 
+                                        rscuIP = rscuIP + 1
+                                        device.append(rscuID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                elif device[4] == '采集器':
+                                        deviceIP,deviceNetMask,deviceGateway = compositeIP(arrayIP[0],arrayIP[1],device[0],ccuIP)
+                                        ccuID = 'ccu-'+str(device[0])+'-'+str(ccuIP) 
+                                        ccuIP = ccuIP + 1
+                                        device.append(ccuID)
+                                        device.append(deviceIP)
+                                        device.append(deviceNetMask)
+                                        device.append(deviceGateway)
+                                        # print(device)
+                                deviceInfoList.append(device)
+        # print(deviceInfoList)
         return deviceInfoList
 
 def compositeIP(ip1,ip2,ip3,ip4):       #合成IP地址，ip分成四段输入
@@ -182,7 +186,7 @@ dfColumns =['路口编号','路口名称','点位杆号','点位信息','设备�
 allBomList,roadIndexList= getDeviceList(excel_name)
 
 deviceList = outDeviceList(allBomList,roadIndexList)
-deviceIpList = assignIP(deviceList)
+deviceIpList = assignIP(deviceList,roadIndexList)
 
 # print(deviceIpList)
 numpyDeviceIpList = pd.DataFrame(deviceIpList)
