@@ -53,7 +53,7 @@ def getDeviceList(filename): #从excel表里读取objec列的所有数值 按照
         # print(allList)
         return allList,roadNumList
    
-def checkNan(numberNan):
+def checkNan(numberNan):        #nan和空字符转为0
 
         if numberNan== 'nan' or numberNan =='':
                 numberNan =0    
